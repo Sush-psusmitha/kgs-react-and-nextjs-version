@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* KGS brand tokens — matches the old site's :root custom properties.
+   @theme turns each of these into real Tailwind utilities:
+   --color-kgs-primary  → bg-kgs-primary, text-kgs-primary, border-kgs-primary, etc.
+   --color-kgs-footer-bg → bg-kgs-footer-bg
+   --font-heading / --font-body → font-heading, font-body */
+@theme {
+  --color-kgs-primary: #F8485E;
+  --color-kgs-footer-bg: #28262B;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  /* Custom breakpoint for the header's desktop/mobile switch — the mega
+     menu needs more room than Tailwind's default `md` (768px) gives it,
+     so this generates a `nav:` variant at 1100px instead. */
+  --breakpoint-nav: 1100px;
+}
