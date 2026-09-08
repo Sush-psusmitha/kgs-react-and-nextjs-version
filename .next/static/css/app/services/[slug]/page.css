@@ -1,0 +1,131 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/components/sections/CaseStudyCarousel.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/* Ported from the old site's .cs-section block. Same reasoning as the
+   other Home sections' CSS files: scroll-snap + a breakpoint that
+   restructures the card from horizontal (image left / content right) to
+   stacked (image top / content below) is real CSS territory. */
+
+.cs-section { position: relative; background: #FFFFFF; padding: 60px 0; overflow: hidden; }
+
+.cs-slider-container { position: relative; margin-bottom: 40px; }
+
+.cs-slider {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+.cs-slider::-webkit-scrollbar { display: none; }
+
+.cs-slide-card {
+  flex: 0 0 min(90%, 1150px);
+  width: min(90%, 1150px);
+  height: 350px;
+  display: flex;
+  flex-direction: row;
+  background: #FFFFFF;
+  border: 1px solid rgba(22, 21, 29, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: 0 2px 8px rgba(16, 15, 23, 0.04);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+.cs-slide-card:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -16px rgba(16, 15, 23, 0.18); }
+.cs-slide-card:last-child { margin-right: 10%; }
+
+.cs-slide-card-img-wrap { flex: 0 0 50%; width: 50%; position: relative; overflow: hidden; background: #EAEAEA; }
+.cs-slide-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.cs-slide-card:hover .cs-slide-card-img { transform: scale(1.05); }
+
+.cs-slide-card-content {
+  flex: 0 0 50%;
+  width: 50%;
+  padding: 60px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: #FFFFFF;
+}
+
+.cs-slide-card-tag {
+  color: var(--color-kgs-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.cs-slide-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.4vw, 1.55rem);
+  font-weight: 700;
+  color: #16151D;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin: 0 0 30px;
+}
+
+.cs-slider-nav { display: flex; justify-content: center; align-items: center; gap: 12px; }
+
+.cs-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.cs-nav-btn:active { transform: scale(0.92); }
+
+.cs-nav-btn--prev { background: #EDEDF0; color: #9A9CA5; }
+.cs-nav-btn--prev:hover { background: #E1E1E5; color: #16151D; }
+
+.cs-nav-btn--next { background: var(--color-kgs-primary); color: #fff; }
+.cs-nav-btn--next:hover { background: #E13A50; }
+
+@media (max-width: 992px) {
+  .cs-slide-card { flex: 0 0 min(94%, 720px); width: min(94%, 720px); height: auto; flex-direction: column; }
+  .cs-slide-card-img-wrap { width: 100%; flex: 0 0 auto; aspect-ratio: 16 / 9; }
+  .cs-slide-card-content { width: 100%; flex: 1 1 auto; padding: 35px 40px; }
+  .cs-slide-card-title { margin-bottom: 24px; }
+}
+
+@media (max-width: 480px) {
+  .cs-slide-card { flex: 0 0 92%; width: 92%; }
+  .cs-slide-card-content { padding: 24px; }
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/components/sections/TestimonialsMarquee.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.stt-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.stt-marquee-wrapper:hover .stt-marquee-track {
+  animation-play-state: paused;
+}
+
