@@ -1,0 +1,199 @@
+/* Ported from the old site's .ind-section block. Same reasoning as
+   AiServicesBento.css: scroll-snap, a multi-stop gradient overlay, and 3
+   responsive breakpoints that resize the cards are clearer as real CSS
+   than as Tailwind arbitrary-value strings. */
+
+.ind-section {
+  position: relative;
+  background: #F4F4F4;
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.ind-top {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.ind-pills-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+  margin: 0 auto;
+  padding-bottom: 2px;
+}
+
+.ind-pill {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 12px 14px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(60, 60, 58, 0.18);
+  background: #fff;
+  color: #16151D;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ind-pill:hover {
+  border-color: var(--color-kgs-primary);
+  color: var(--color-kgs-primary);
+}
+
+.ind-pill--active,
+.ind-pill--active:hover {
+  background: var(--color-kgs-primary);
+  border-color: var(--color-kgs-primary);
+  color: #fff;
+}
+
+.ind-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.ind-text {
+  flex: 0 0 500px;
+  max-width: 500px;
+}
+
+.ind-cards {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-top: -16px;
+  margin-bottom: -16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.ind-cards::-webkit-scrollbar { display: none; }
+
+.ind-card {
+  position: relative;
+  flex: 0 0 calc(83.333% - 16.667px);
+  width: calc(83.333% - 16.667px);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ind-card:hover { transform: translateY(-5px); }
+.ind-card:last-child { margin-right: 15%; }
+
+.ind-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ind-card:hover .ind-card-img { transform: scale(1.06); }
+
+.ind-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 35%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+}
+
+.ind-card-content,
+.ind-card-footer {
+  position: relative;
+  z-index: 2;
+}
+
+.ind-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.ind-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 380px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 500;
+}
+
+.ind-card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ind-card-trust {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ind-card-trust-label {
+  display: block;
+  color: var(--color-kgs-primary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.ind-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 16px;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+.ind-card-cta:hover { background: #222; }
+
+@media (max-width: 992px) {
+  .ind-body { flex-direction: column; align-items: stretch; gap: 32px; }
+  .ind-text { flex: none; max-width: none; width: 100%; }
+  .ind-card { flex-basis: calc(83.333% - 16.667px); width: calc(83.333% - 16.667px); height: 420px; }
+}
+
+@media (max-width: 480px) {
+  .ind-section { padding: 60px 0; }
+  .ind-pill { padding: 5px 10px; font-size: 0.75rem; }
+  .ind-body { margin-top: 30px; }
+  .ind-card { height: 360px; padding: 20px; }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .ind-text { flex: 0 0 380px; max-width: 380px; }
+}

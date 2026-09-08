@@ -1,12 +1,10 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import {
-  FaBrain, FaDatabase, FaTruckFast, FaChartPie, FaScaleBalanced, FaShieldHalved, FaCode,
-  FaLeaf, FaRobot, FaFileInvoiceDollar, FaServer, FaHeartPulse, FaUmbrella, FaBoxesPacking,
-  FaBuildingColumns, FaShip, FaBolt, FaTruck, FaHouseChimney, FaIndustry, FaCartShopping,
-  FaCity, FaShieldHeart, FaStore,
   FaCalendarDays, FaBookOpen, FaDiagramProject, FaCubes, FaChevronRight,
-  FaBuilding, FaUsers, FaBriefcase, FaTrophy, FaLocationDot,
+  FaBuilding, FaUsers, FaBriefcase, FaTrophy, FaLocationDot, FaLeaf,
   FaLightbulb, FaChartLine, FaFileLines, FaQuoteRight, FaHandshake,
   FaChevronDown, FaXmark,
 } from 'react-icons/fa6'
@@ -18,40 +16,15 @@ import promoPlatforms from '../../assets/images/common/ai-blog-title-01.webp'
 import promoCompany from '../../assets/images/common/qualified-to-excel.webp'
 import promoResources from '../../assets/images/common/case-studies-bg.png'
 
-// ── Nav content, as data — not hand-written 35 times in JSX ──
-const SERVICES_COL_1 = [
-  { icon: FaBrain, label: 'Gen AI Services', to: '/services/generative-ai' },
-  { icon: FaDatabase, label: 'Data Management', to: '/services/data-management' },
-  { icon: FaTruckFast, label: 'Logistics', to: '/services/logistics' },
-  { icon: FaChartPie, label: 'Data Science & BI', to: '/services/data-science-business-intelligence' },
-  { icon: FaScaleBalanced, label: 'LPO', to: '/services/legal-process-outsourcing' },
-  { icon: FaShieldHalved, label: 'Cybersecurity', to: '/services/cybersecurity' },
-  { icon: FaCode, label: 'Software Development', to: '/services/software-development' },
-]
-const SERVICES_COL_2 = [
-  { icon: FaLeaf, label: 'ESG', to: '/services/esg-consulting' },
-  { icon: FaRobot, label: 'Automation', to: '/services/business-process-automation' },
-  { icon: FaFileInvoiceDollar, label: 'Finance & Accounting', to: '/services/finance-accounting' },
-  { icon: FaServer, label: 'Data Engineering', to: '/services/data-engineering' },
-  { icon: FaHeartPulse, label: 'Healthcare', to: '/services/healthcare' },
-  { icon: FaUmbrella, label: 'Insurance', to: '/services/insurance' },
-  { icon: FaBoxesPacking, label: 'Custom Brokerage', to: '/services/customs-brokerage' },
-]
+import services from '../../content/services'
+import industries from '../../content/industries'
 
-const INDUSTRIES_COL_1 = [
-  { icon: FaBuildingColumns, label: 'Banking & Finance', to: '/industries/banking-finance' },
-  { icon: FaShip, label: 'Custom Brokerage', to: '/industries/customs-brokerage' },
-  { icon: FaBolt, label: 'Energy & Utilities', to: '/industries/energy-utilities' },
-  { icon: FaTruck, label: 'Logistics', to: '/industries/logistics' },
-  { icon: FaHouseChimney, label: 'Mortgage', to: '/industries/mortgage' },
-]
-const INDUSTRIES_COL_2 = [
-  { icon: FaIndustry, label: 'Manufacturing', to: '/industries/manufacturing' },
-  { icon: FaCartShopping, label: 'E-commerce', to: '/industries/ecommerce' },
-  { icon: FaCity, label: 'Real Estate', to: '/industries/real-estate' },
-  { icon: FaShieldHeart, label: 'Insurance', to: '/industries/insurance' },
-  { icon: FaStore, label: 'Retail', to: '/industries/retail' },
-]
+// Services/industries used to live here as private arrays — now shared
+// with Home's grids via content/services.js and content/industries.js.
+const SERVICES_COL_1 = services.slice(0, 7)
+const SERVICES_COL_2 = services.slice(7)
+const INDUSTRIES_COL_1 = industries.slice(0, 5)
+const INDUSTRIES_COL_2 = industries.slice(5)
 
 const PLATFORMS = [
   { icon: FaCalendarDays, label: 'MapMyClasses', sub: 'Smart class scheduling & management', to: '/products/mapmyclasses' },
@@ -79,15 +52,10 @@ const RESOURCE_LINKS = [
   { icon: FaHandshake, label: 'Customers', sub: 'Brands that trust KGS', to: '/customers' },
 ]
 
-// One small reusable row — icon + title (+ optional subtitle) — instead of
-// retyping this markup 35 times across four different dropdowns.
-// The dropdown panels are always light-themed (they open over whatever page
-// content sits below), independent of whether the header bar itself is
-// transparent or solid — so this component doesn't need to know about that.
 function GridLink({ icon: Icon, label, sub, to, onClick }) {
   return (
     <Link
-      to={to}
+      href={to}
       onClick={onClick}
       className="group flex items-start gap-2.5 rounded-lg p-1.5 hover:bg-neutral-100"
     >
@@ -98,7 +66,7 @@ function GridLink({ icon: Icon, label, sub, to, onClick }) {
         <span className="block font-heading text-[11px] min-[1280px]:text-[13px] font-semibold text-neutral-900 group-hover:text-kgs-primary">
           {label}
         </span>
-        {sub && <span className="block font-body text-[11px] text-neutral-500">{sub}</span>}
+        {sub && <span className="block font-body text-[11px] text-neutral-700">{sub}</span>}
       </span>
     </Link>
   )
@@ -106,8 +74,8 @@ function GridLink({ icon: Icon, label, sub, to, onClick }) {
 
 function PromoCard({ image, title, desc, to }) {
   return (
-    <Link to={to} className="group relative block overflow-hidden rounded-xl">
-      <img src={image} alt="" className="h-40 w-full object-cover transition-transform group-hover:scale-105" />
+    <Link href={to} className="group relative block overflow-hidden rounded-xl">
+      <img src={image?.src || image} alt="" className="h-40 w-full object-cover transition-transform group-hover:scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-4">
         <h4 className="font-heading text-sm font-bold text-white">{title}</h4>
@@ -117,9 +85,6 @@ function PromoCard({ image, title, desc, to }) {
   )
 }
 
-// Mobile section label — plain text, no icon, matching the old site's
-// .mob-section-label (a small grouping header inside the Expertise accordion,
-// e.g. "SERVICES" / "INDUSTRIES" / "PRODUCTS").
 function MobSectionLabel({ children }) {
   return (
     <div className="mt-4 mb-1 font-heading text-xs font-bold uppercase tracking-wide text-neutral-400 first:mt-0">
@@ -128,10 +93,6 @@ function MobSectionLabel({ children }) {
   )
 }
 
-// One accordion section in the mobile menu — a trigger button + a panel
-// that's simply mounted/unmounted based on whether this section's name
-// matches the single shared `openSection` state (same single-state pattern
-// as the desktop mega menu, just scoped to the mobile drawer).
 function MobAccordion({ name, label, openSection, onToggle, children }) {
   const isOpen = openSection === name
   return (
@@ -150,10 +111,6 @@ function MobAccordion({ name, label, openSection, onToggle, children }) {
 }
 
 function Header() {
-  // ONE state variable for which dropdown is open — 'expertise' | 'platforms' |
-  // 'company' | 'resources' | null — instead of four separate booleans.
-  // That guarantees only one can ever be open at a time, for free, with no
-  // extra logic: opening a new one just overwrites openMenu.
   const [openMenu, setOpenMenu] = useState(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -169,15 +126,8 @@ function Header() {
     setMobileSection(null)
   }
 
-  // Solid (white, dark text) whenever we've scrolled past the hero OR a
-  // dropdown is open — matches the old site's rule exactly: a see-through
-  // header over a dropdown panel is unreadable, so opening one forces the
-  // solid look even at the very top of the page.
   const isSolid = isScrolled || openMenu !== null
 
-  // Close on outside click and on Escape — a real-world example of useEffect
-  // used for something that isn't data fetching: subscribing to a
-  // browser-level event and cleaning it up when the component unmounts.
   useEffect(() => {
     function handleClickOutside(event) {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
@@ -195,9 +145,6 @@ function Header() {
     }
   }, [])
 
-  // Second, separate useEffect for scroll — kept apart from the click/escape
-  // one on purpose: each effect should subscribe to one thing and clean up
-  // after itself, not become a single effect doing three unrelated jobs.
   useEffect(() => {
     function handleScroll() {
       setIsScrolled(window.scrollY > 40)
@@ -206,12 +153,6 @@ function Header() {
     return () => document.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // The desktop mega menu's trigger buttons are hidden below the `nav`
-  // breakpoint (1100px), but hiding the *button* doesn't close a panel that
-  // was already open before the viewport crossed that width — e.g. resizing
-  // a wide window down, or rotating a tablet. Without this, the full-width
-  // desktop panel stays stuck open underneath the hamburger. This watches
-  // for that crossing and force-closes it.
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 1100) closeMenu()
@@ -220,8 +161,6 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Lock page scroll while the mobile drawer is open — otherwise the page
-  // behind it keeps scrolling underneath a menu that's supposed to be modal.
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : ''
     return () => {
@@ -230,6 +169,8 @@ function Header() {
   }, [isMobileOpen])
 
   const navLinkClass = `flex items-center gap-1.5 whitespace-nowrap font-weight text-[15px] hover:opacity-70 ${isSolid ? 'text-neutral-900' : 'text-white'}`
+
+  const currentLogo = isSolid ? kgsLogoBlack : kgsLogoWhite
 
   return (
     <header
@@ -244,11 +185,11 @@ function Header() {
 
       <nav className="relative px-6 md:px-10">
         <div className="flex h-17 items-center justify-between">
-          <Link to="/" aria-label="Kotnani Global Solutions home" onClick={closeMenu}>
-            <img src={isSolid ? kgsLogoBlack : kgsLogoWhite} alt="Kotnani Global Solutions" className="h-8" />
+          <Link href="/" aria-label="Kotnani Global Solutions home" onClick={closeMenu}>
+            <img src={currentLogo?.src || currentLogo} alt="Kotnani Global Solutions" className="h-8" />
           </Link>
 
-          <ul className="hidden items-center gap-8 text-md font-medium nav:flex">
+          <ul className="hidden items-center gap-8 text-md font-bold nav:flex">
             <li>
               <button
                 onClick={() => toggleMenu('expertise')}
@@ -292,7 +233,7 @@ function Header() {
           </ul>
 
           <Link
-            to="/contact"
+            href="/contact"
             onClick={closeMenu}
             className="hidden rounded-full bg-kgs-primary px-5 py-2 text-sm font-semibold text-white hover:opacity-90 nav:inline-block"
           >
@@ -449,35 +390,35 @@ function Header() {
         aria-label="Mobile navigation"
       >
         <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
-          <img src={kgsLogoBlack} alt="Kotnani Global Solutions" className="h-7" />
+          <img src={kgsLogoBlack?.src || kgsLogoBlack} alt="Kotnani Global Solutions" className="h-7" />
           <button onClick={closeMobileMenu} aria-label="Close menu" className="text-2xl text-neutral-900">
             <FaXmark />
           </button>
         </div>
 
         <nav className="px-5 py-4">
-          <Link to="/" onClick={closeMobileMenu} className="block py-3 font-heading text-base font-semibold text-neutral-900">
+          <Link href="/" onClick={closeMobileMenu} className="block py-3 font-heading text-base font-semibold text-neutral-900">
             Home
           </Link>
 
           <MobAccordion name="expertise" label="Our Expertise" openSection={mobileSection} onToggle={toggleMobileSection}>
             <MobSectionLabel>Services</MobSectionLabel>
             {[...SERVICES_COL_1, ...SERVICES_COL_2].map(({ label, to }) => (
-              <Link key={to} to={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
+              <Link key={to} href={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
                 {label}
               </Link>
             ))}
 
             <MobSectionLabel>Industries</MobSectionLabel>
             {[...INDUSTRIES_COL_1, ...INDUSTRIES_COL_2].map(({ label, to }) => (
-              <Link key={to} to={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
+              <Link key={to} href={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
                 {label}
               </Link>
             ))}
 
             <MobSectionLabel>Products</MobSectionLabel>
             {PLATFORMS.map(({ label, to }) => (
-              <Link key={to} to={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
+              <Link key={to} href={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
                 {label}
               </Link>
             ))}
@@ -485,7 +426,7 @@ function Header() {
 
           <MobAccordion name="company" label="Our Company" openSection={mobileSection} onToggle={toggleMobileSection}>
             {COMPANY_LINKS.map(({ label, to }) => (
-              <Link key={to} to={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
+              <Link key={to} href={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
                 {label}
               </Link>
             ))}
@@ -493,17 +434,17 @@ function Header() {
 
           <MobAccordion name="resources" label="Resources" openSection={mobileSection} onToggle={toggleMobileSection}>
             {RESOURCE_LINKS.map(({ label, to }) => (
-              <Link key={to} to={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
+              <Link key={to} href={to} onClick={closeMobileMenu} className="block py-2 text-sm text-neutral-700">
                 {label}
               </Link>
             ))}
           </MobAccordion>
 
-          <Link to="/contact" onClick={closeMobileMenu} className="block py-4 font-heading text-base font-semibold text-neutral-900">
+          <Link href="/contact" onClick={closeMobileMenu} className="block py-4 font-heading text-base font-semibold text-neutral-900">
             Contact
           </Link>
           <Link
-            to="/contact"
+            href="/contact"
             onClick={closeMobileMenu}
             className="mt-2 block rounded-full bg-kgs-primary px-5 py-3 text-center text-sm font-semibold text-white"
           >

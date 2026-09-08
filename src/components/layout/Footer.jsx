@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { FaPhone, FaEnvelope } from 'react-icons/fa6'
 
 import kgsLogoWhite from '../../assets/images/common/KGS-logo-white.svg'
@@ -58,9 +58,6 @@ const popularServices = [
   { to: '/services/cybersecurity', label: 'Cybersecurity' },
 ]
 
-// Small red underline under each column heading — same look as the old
-// site's .footer-col-title::after, done with Tailwind's `after:` variant
-// instead of a separate ::after rule in a stylesheet.
 const colTitle =
   "relative inline-block pb-2.5 mb-3 font-heading text-lg font-bold text-white " +
   "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-7 after:rounded-full after:bg-kgs-primary"
@@ -75,8 +72,8 @@ function Footer() {
 
           {/* Brand + contact */}
           <div>
-            <Link to="/" aria-label="Kotnani Global Solutions home" className="mb-5 inline-block">
-              <img src={kgsLogoWhite} alt="Kotnani Global Solutions" className="h-8" />
+            <Link href="/" aria-label="Kotnani Global Solutions home" className="mb-5 inline-block">
+              <img src={kgsLogoWhite?.src || kgsLogoWhite} alt="Kotnani Global Solutions" className="h-8" />
             </Link>
 
             <p className="mb-5 max-w-[300px] font-body font-medium leading-relaxed text-white">
@@ -107,7 +104,7 @@ function Footer() {
                   rel="noopener"
                   className="transition-transform hover:-translate-y-0.5 hover:opacity-80"
                 >
-                  <img src={icon} alt="" className="h-[22px] w-[22px] object-contain" />
+                  <img src={icon?.src || icon} alt="" className="h-[22px] w-[22px] object-contain" />
                 </a>
               ))}
             </div>
@@ -119,12 +116,12 @@ function Footer() {
             <div className="grid grid-cols-2 gap-x-5">
               <ul className="flex flex-col gap-[18px]">
                 {quickLinks.slice(0, 5).map(({ to, label }) => (
-                  <li key={to}><Link to={to} className={footerLink}>{label}</Link></li>
+                  <li key={to}><Link href={to} className={footerLink}>{label}</Link></li>
                 ))}
               </ul>
               <ul className="flex flex-col gap-[18px]">
                 {quickLinks.slice(5).map(({ to, label }) => (
-                  <li key={to}><Link to={to} className={footerLink}>{label}</Link></li>
+                  <li key={to}><Link href={to} className={footerLink}>{label}</Link></li>
                 ))}
               </ul>
             </div>
@@ -135,7 +132,7 @@ function Footer() {
             <h3 className={colTitle}>Popular Services</h3>
             <ul className="flex flex-col gap-[18px]">
               {popularServices.map(({ to, label }) => (
-                <li key={to}><Link to={to} className={footerLink}>{label}</Link></li>
+                <li key={to}><Link href={to} className={footerLink}>{label}</Link></li>
               ))}
             </ul>
           </nav>
@@ -143,8 +140,8 @@ function Footer() {
           {/* ISO badges + Ask AI */}
           <div className="flex flex-col gap-6">
             <div className="flex flex-nowrap items-center gap-2.5">
-              <img src={isoBadge27001} alt="ISO 27001:2022 Certified — Information Security Management" className="h-10 w-auto shrink-0 object-contain" />
-              <img src={isoBadge9001} alt="ISO 9001:2015 Certified — Quality Management System" className="h-10 w-auto shrink-0 object-contain" />
+              <img src={isoBadge27001?.src || isoBadge27001} alt="ISO 27001:2022 Certified — Information Security Management" className="h-10 w-auto shrink-0 object-contain" />
+              <img src={isoBadge9001?.src || isoBadge9001} alt="ISO 9001:2015 Certified — Quality Management System" className="h-10 w-auto shrink-0 object-contain" />
             </div>
 
             <div>
@@ -159,7 +156,7 @@ function Footer() {
                     rel="noopener"
                     className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] transition-all hover:-translate-y-0.5 hover:border-kgs-primary/50"
                   >
-                    <img src={icon} alt="" className="h-full w-full object-cover" />
+                    <img src={icon?.src || icon} alt="" className="h-full w-full object-cover" />
                   </a>
                 ))}
               </div>
@@ -173,11 +170,11 @@ function Footer() {
             The information on this website cannot be commercially used without the prior consent of Kotnani Global
             Solutions. Third-party logos displayed on the website are not owned by us, and are displayed only for
             representation purpose. The ownership and copyright of Logos belong to their respective organizations.{' '}
-            <Link to="/terms-and-conditions" className="underline underline-offset-2 hover:text-kgs-primary">
+            <Link href="/terms-and-conditions" className="underline underline-offset-2 hover:text-kgs-primary">
               Terms &amp; Conditions
             </Link>{' '}
             |{' '}
-            <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-kgs-primary">
+            <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-kgs-primary">
               Privacy Policy
             </Link>
           </p>

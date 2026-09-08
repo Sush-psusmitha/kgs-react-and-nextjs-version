@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* KGS brand tokens — matches the static site's design system.
+   @theme turns each of these into real Tailwind utilities:
+   --color-kgs-primary  → bg-kgs-primary, text-kgs-primary, border-kgs-primary, etc.
+   --color-kgs-footer-bg → bg-kgs-footer-bg
+   --font-heading / --font-body → font-heading, font-body */
+@theme {
+  --color-kgs-primary: #F8485E;
+  --color-kgs-footer-bg: #28262B;
+  --font-heading: var(--font-montserrat), 'Montserrat', sans-serif;
+  --font-body: var(--font-montserrat), 'Montserrat', sans-serif;
+
+  /* Custom breakpoint for the header's desktop/mobile switch — the mega
+     menu needs more room than Tailwind's default `md` (768px) gives it,
+     so this generates a `nav:` variant at 1100px instead. */
+  --breakpoint-nav: 1100px;
+}
+
+/* ============================================================
+   HERO — letter-by-letter flip-in title animation & Ken Burns
+   Ported from the old site's js-driven .js-flip-text mechanism
+   ============================================================ */
+@keyframes hero-ken-burns {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.animate-ken-burns {
+  animation: hero-ken-burns 22s ease-in-out infinite;
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-fade-up {
+  animation: hero-fade-up 0.75s ease forwards;
+}
+
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.split-letter {
+  display: inline-block;
+  transform: rotateX(90deg);
+  opacity: 0;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+.letters-in .split-letter {
+  animation: hero-letter-flip-in 0.45s cubic-bezier(0.22, 0.85, 0.32, 1) forwards;
+  animation-delay: var(--letter-delay, 0s);
+}
+@keyframes hero-letter-flip-in {
+  to { transform: rotateX(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns,
+  .animate-hero-fade-up {
+    animation: none;
+  }
+  .split-letter {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

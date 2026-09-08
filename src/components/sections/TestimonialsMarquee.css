@@ -1,0 +1,18 @@
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.stt-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.stt-marquee-wrapper:hover .stt-marquee-track {
+  animation-play-state: paused;
+}

@@ -1,0 +1,245 @@
+/* Ported near-verbatim from the old site's .ai-services-grid block in
+   style.css. This section is left as plain CSS rather than forced into
+   Tailwind utility strings — with 3 responsive breakpoints each
+   repositioning cards on the grid, plus per-card object-position and a
+   hover-intensifies-scrim detail, hand-written CSS is genuinely clearer
+   here than an arbitrary-value utility string per breakpoint would be.
+   var(--color-kgs-primary) below is a real CSS custom property — Tailwind's
+   @theme in index.css generates it under :root, so plain CSS can read it
+   directly instead of re-hardcoding the hex value. */
+
+.ai-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.ai-card {
+  border-radius: 10px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+  color: #FFFFFF;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.ai-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.ai-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: 2;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.ai-card:hover::before {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.ai-card-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-card:hover .ai-card-bg-img {
+  transform: scale(1.06);
+}
+
+.ai-card--dark .ai-card-bg-img {
+  object-position: right center;
+}
+
+.ai-card--teal .ai-card-bg-img {
+  object-position: right center;
+}
+
+.ai-card--grey .ai-card-bg-img {
+  object-position: right bottom;
+}
+
+.ai-card-content {
+  position: relative;
+  z-index: 3;
+}
+
+.ai-card--teal {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ai-card--teal .ai-card-content {
+  max-width: 380px;
+}
+
+.ai-card--teal::before,
+.ai-card--teal:hover::before {
+  background: none;
+}
+
+.ai-card--grey,
+.ai-card--dark-abstract {
+  justify-content: flex-start;
+}
+
+.ai-card--dark-abstract::before {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.ai-card--dark-abstract:hover::before {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.ai-card--grey::before,
+.ai-card--grey:hover::before {
+  background: none;
+}
+
+.ai-card--teal .ai-card-title,
+.ai-card--teal .ai-card-desc,
+.ai-card--grey .ai-card-title,
+.ai-card--grey .ai-card-desc {
+  color: #242424;
+}
+
+.ai-card--dark {
+  background-color: #0F0F11;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  min-height: 620px;
+}
+
+.ai-card--teal {
+  background-color: #9BBFBC;
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
+.ai-card--grey {
+  background-color: #E6E8EA;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.ai-card--dark-abstract {
+  background-color: #121214;
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.ai-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+.ai-card-desc {
+  font-size: clamp(0.85rem, 1vw, 0.97rem);
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  font-weight: 500;
+  color: #E5E7EB;
+}
+
+.ai-card-link {
+  color: var(--color-kgs-primary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.ai-card-link .arrow {
+  transition: transform 0.2s ease;
+}
+
+.ai-card-link:hover {
+  color: #FF5A70;
+}
+
+.ai-card-link:hover .arrow {
+  transform: translateX(4px);
+}
+
+@media (min-width: 1025px) and (max-width: 1499px) {
+  .ai-card--teal .ai-card-bg-img {
+    object-position: 74% center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ai-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ai-card--dark {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    min-height: 550px;
+  }
+
+  .ai-card--teal {
+    grid-column: 2;
+    grid-row: 1;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .ai-card--teal .ai-card-content {
+    max-width: none;
+  }
+
+  .ai-card--grey {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .ai-card--dark-abstract {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-services-section {
+    padding: 60px 0;
+  }
+
+  .ai-services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ai-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 320px !important;
+    padding: 30px;
+  }
+}
