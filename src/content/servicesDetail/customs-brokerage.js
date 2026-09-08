@@ -35,6 +35,7 @@ const customsBrokerage = {
   hero: {
     tag: 'Custom Brokerage',
     title: 'Customs Brokerage Services for International Trade',
+    desc: 'Move goods across borders with fewer delays and less paperwork.',
     bgImage: heroBg,
     actions: [
       { label: 'Talk to an Expert', href: 'tel:+918022450187', variant: 'primary' },

@@ -35,6 +35,7 @@ const dataManagement = {
   hero: {
     tag: 'Data Management',
     title: 'Make Better Business Decisions on Accurate, Consistent Data',
+    desc: 'Get your enterprise data accurate, governed, and ready to use.',
     bgImage: heroBg,
     actions: [
       { label: 'Talk to an Expert', href: 'tel:+918022450187', variant: 'primary' },

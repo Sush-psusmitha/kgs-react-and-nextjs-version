@@ -64,6 +64,7 @@ export default async function ServiceDetailPage({ params }) {
       <Hero
         tag={service.hero?.tag}
         title={service.hero?.title}
+        desc={service.hero?.desc}
         bgImage={service.hero?.bgImage?.src || service.hero?.bgImage}
         actions={service.hero?.actions}
       />

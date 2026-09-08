@@ -38,6 +38,7 @@ function TestimonialsMarquee({
   label = 'Testimonials',
   title = 'Across industries and continents, the same line keeps surfacing',
   items = [],
+  showLogos = true,
 }) {
   const [ref, isInView] = useInView()
   const trackRef = useRef(null)
@@ -126,19 +127,21 @@ function TestimonialsMarquee({
         </div>
 
         {/* Client Logos Infinite Marquee */}
-        <div className="stt-marquee-wrapper mt-12 overflow-hidden border-t border-b border-neutral-100 py-4">
-          <div className="stt-marquee-track items-center gap-20">
-            {CLIENT_LOGOS.concat(CLIENT_LOGOS).map((logo, idx) => (
-              <img
-                key={idx}
-                src={logo.src?.src || logo.src}
-                alt={logo.alt}
-                loading="lazy"
-                className="h-20 w-auto max-w-[170px] object-contain transition-transform duration-300 hover:scale-105"
-              />
-            ))}
+        {showLogos && (
+          <div className="stt-marquee-wrapper mt-12 overflow-hidden border-t border-b border-neutral-100 py-4">
+            <div className="stt-marquee-track items-center gap-20">
+              {CLIENT_LOGOS.concat(CLIENT_LOGOS).map((logo, idx) => (
+                <img
+                  key={idx}
+                  src={logo.src?.src || logo.src}
+                  alt={logo.alt}
+                  loading="lazy"
+                  className="h-20 w-auto max-w-[170px] object-contain transition-transform duration-300 hover:scale-105"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

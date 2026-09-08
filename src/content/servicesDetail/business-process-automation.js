@@ -28,8 +28,9 @@ const businessProcessAutomation = {
   breadcrumbLabel: 'Automation',
 
   hero: {
-    tag:'Automation',
+    tag: 'Automation',
     title: 'Turn Everyday Processes into Measurable Business Value',
+    desc: 'Take repetitive work off your teams with intelligent automation.',
     bgImage: heroBg,
     actions: [
       { label: 'Talk to an Expert', href: 'tel:+918022450187', variant: 'primary' },

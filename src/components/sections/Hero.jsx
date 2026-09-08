@@ -5,8 +5,9 @@ import ArrowButton from '../ui/ArrowButton'
  * The full-bleed hero used on Home, Service detail, Industry detail, and
  * About pages.
  */
-function Hero({ tag, title, description, actions = [], bgImage, bgImageAlt = '' }) {
+function Hero({ tag, title, description, desc, actions = [], bgImage, bgImageAlt = '' }) {
   const imageSrc = bgImage?.src || bgImage
+  const heroDescription = description || desc
 
   return (
     <section className="hero relative flex min-h-[500px] items-center overflow-hidden bg-black py-20 nav:min-h-screen">
@@ -30,12 +31,12 @@ function Hero({ tag, title, description, actions = [], bgImage, bgImageAlt = '' 
           <FlipText
             as="h1"
             text={title}
-            className="mb-6 mt-2 block font-heading text-4xl font-bold leading-tight text-white nav:text-5xl"
+            className="mb-6 mt-2 block font-heading text-3xl font-bold leading-tight text-white nav:text-5xl"
           />
 
-          {description && (
+          {heroDescription && (
             <p className="mb-10 max-w-155 font-body text-base leading-relaxed text-white/86 nav:text-lg">
-              {description}
+              {heroDescription}
             </p>
           )}
 

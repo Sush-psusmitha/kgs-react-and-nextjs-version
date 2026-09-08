@@ -35,6 +35,7 @@ const generativeAi = {
   hero: {
     tag: 'Gen AI Services',
     title: 'Transform Enterprise Operations with Generative AI Services',
+    desc: 'Move from AI experimentation to measurable business results.',
     bgImage: heroBg,
     actions: [
       { label: 'Talk to an Expert', href: 'tel:+918022450187', variant: 'primary' },

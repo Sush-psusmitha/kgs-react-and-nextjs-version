@@ -18,15 +18,31 @@ function FaqSection({
   ctaLabel = 'Book a Consultation',
   ctaTo = '/contact',
   items = [],
+  faq,
 }) {
   const [ref, isInView] = useInView()
   const [openIndex, setOpenIndex] = useState(0) // First item open by default matching old site
+
+  // Normalize items whether passed via `items` or `faq`
+  const faqObject = (faq && !Array.isArray(faq) && typeof faq === 'object') ? faq : null
+  const displayTitle = faqObject?.title || title
+  const displayDesc = faqObject?.desc || desc
+  const displayCtaTitle = faqObject?.ctaTitle || ctaTitle
+  const displayCtaDesc = faqObject?.ctaDesc || ctaDesc
+  const displayCtaLabel = faqObject?.ctaLabel || ctaLabel
+  const displayCtaTo = faqObject?.ctaTo || ctaTo
+
+  const rawItems = (items && items.length > 0)
+    ? items
+    : Array.isArray(faq)
+    ? faq
+    : faqObject?.items || []
 
   const toggleItem = (index) => {
     setOpenIndex((current) => (current === index ? null : index))
   }
 
-  if (!items || items.length === 0) return null
+  if (!rawItems || rawItems.length === 0) return null
 
   return (
     <section
@@ -42,30 +58,30 @@ function FaqSection({
           <div className="flex flex-col justify-between gap-8">
             <div>
               <h2 id="svcfaqHeading" className="mb-4 font-heading text-2xl font-bold text-neutral-900 nav:text-3xl">
-                {title}
+                {displayTitle}
               </h2>
               <p className="font-body font-medium text-base leading-relaxed text-neutral-700">
-                {desc}
+                {displayDesc}
               </p>
             </div>
 
             {/* Need More Clarity Card */}
             <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
               <h3 className="mb-2 font-heading text-lg font-bold text-neutral-900">
-                {ctaTitle}
+                {displayCtaTitle}
               </h3>
               <p className="mb-6 font-body text-sm leading-relaxed font-medium text-neutral-500">
-                {ctaDesc}
+                {displayCtaDesc}
               </p>
-              <ArrowButton to={ctaTo} variant="primary">
-                {ctaLabel}
+              <ArrowButton to={displayCtaTo} variant="primary">
+                {displayCtaLabel}
               </ArrowButton>
             </div>
           </div>
 
           {/* Right column (Accordion) */}
           <div className="flex flex-col gap-4">
-            {items.map(({ question, answer }, idx) => {
+            {rawItems.map(({ question, answer }, idx) => {
               const isOpen = openIndex === idx
               return (
                 <div

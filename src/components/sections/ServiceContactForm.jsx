@@ -161,7 +161,7 @@ function ServiceContactForm({
             <h2 id="svcformHeading" className="mb-6 font-heading text-3xl font-bold leading-tight text-white nav:text-4xl">
               {title}
             </h2>
-            <p className="font-body text-base leading-relaxed text-white/80 nav:text-lg">
+            <p className="font-body text-base font-medium leading-relaxed text-white/80 nav:text-lg">
               {desc}
             </p>
           </div>

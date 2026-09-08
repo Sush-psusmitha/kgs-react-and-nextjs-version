@@ -35,6 +35,7 @@ const logistics = {
   hero: {
     tag: 'Logistics',
     title: 'Enhance Logistics Control Across Your Supply Chain',
+    desc: 'Improve supply chain efficiency with logistics services, freight management, and warehouse support, designed for modern enterprises.',
     bgImage: heroBg,
     actions: [
       { label: 'Talk to an Expert', href: 'tel:+918022450187', variant: 'primary' },

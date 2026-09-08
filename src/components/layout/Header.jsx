@@ -179,9 +179,6 @@ function Header() {
         isSolid ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}
     >
-      {!isSolid && (
-        <div className="absolute inset-0 h-32 bg-linear-to-b from-black/60 to-transparent pointer-events-none" />
-      )}
 
       <nav className="relative px-6 md:px-10">
         <div className="flex h-17 items-center justify-between">
