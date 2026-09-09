@@ -35,9 +35,37 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const title = `${product.name || product.hero?.title} | Kotnani Global Solutions`;
+  const description = product.hero?.description || product.intro?.description?.[0] || 'Kotnani Global Solutions Products';
+  const canonicalUrl = `https://www.kotnaniglobal.com/products/${slug}.html`;
+  const rawBanner = product.hero?.bannerImage;
+  const ogImage = typeof rawBanner === 'string' ? rawBanner : (rawBanner?.src || '/images/banner/home-hero.webp');
+
   return {
-    title: `${product.name || product.hero?.title} | Kotnani Global Solutions`,
-    description: product.hero?.description || product.intro?.description?.[0] || 'Kotnani Global Solutions Products',
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -68,7 +96,7 @@ export default async function ProductDetailPage({ params }) {
           },
           {
             label: product.hero?.secondaryCta?.text || 'Explore Features',
-            to: product.hero?.secondaryCta?.link || '#features',
+            href: product.hero?.secondaryCta?.link || '#features',
             variant: 'outline',
           },
         ]}

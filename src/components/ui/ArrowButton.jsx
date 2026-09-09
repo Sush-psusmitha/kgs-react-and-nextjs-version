@@ -21,9 +21,10 @@ function ArrowButton({ to, href, variant = 'primary', className = '', children }
     />
   )
 
-  if (href) {
+  const isAnchor = href || (typeof to === 'string' && (to.startsWith('#') || to.startsWith('http') || to.startsWith('mailto:') || to.startsWith('tel:')))
+  if (isAnchor) {
     return (
-      <a href={href} className={classes}>
+      <a href={href || to} className={classes}>
         {children}
         {arrow}
       </a>

@@ -100,7 +100,7 @@ function TestimonialsMarquee({
           onTouchEnd={() => setIsPaused(false)}
           className="flex gap-6 overflow-x-auto pb-8 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
         >
-          {items.map(({ quote, role, company }, idx) => (
+          {items.map(({ quote, role, company, author, designation }, idx) => (
             <div
               key={idx}
               className="group relative flex w-[350px] shrink-0 flex-col justify-between rounded-2xl border border-neutral-200 bg-neutral-50/70 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-kgs-primary/50 hover:bg-white hover:shadow-xl md:w-[420px]"
@@ -109,17 +109,16 @@ function TestimonialsMarquee({
                 <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-kgs-primary/10 text-kgs-primary">
                   <FaQuoteRight size={16} />
                 </span>
-                <p className="font-body text-sm leading-relaxed font-medium
-                 text-neutral-600">
+                <p className="font-body text-sm leading-relaxed font-medium text-neutral-600">
                   {quote}
                 </p>
               </div>
               <div className="border-t border-neutral-200/80 pt-4">
                 <span className="block font-heading text-sm font-bold text-neutral-900">
-                  {role}
+                  {role || author}
                 </span>
                 <span className="block font-body text-xs font-semibold text-neutral-700">
-                  {company}
+                  {company || designation}
                 </span>
               </div>
             </div>

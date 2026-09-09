@@ -36,7 +36,7 @@ function FaqSection({
     ? items
     : Array.isArray(faq)
     ? faq
-    : faqObject?.items || []
+    : faqObject?.items || faqObject?.cards || []
 
   const toggleItem = (index) => {
     setOpenIndex((current) => (current === index ? null : index))
@@ -70,7 +70,7 @@ function FaqSection({
               <h3 className="mb-2 font-heading text-lg font-bold text-neutral-900">
                 {displayCtaTitle}
               </h3>
-              <p className="mb-6 font-body text-sm leading-relaxed font-medium text-neutral-500">
+              <p className="mb-6 font-body text-sm font-medium leading-relaxed text-neutral-600">
                 {displayCtaDesc}
               </p>
               <ArrowButton to={displayCtaTo} variant="primary">
@@ -81,11 +81,13 @@ function FaqSection({
 
           {/* Right column (Accordion) */}
           <div className="flex flex-col gap-4">
-            {rawItems.map(({ question, answer }, idx) => {
+            {rawItems.map((item, idx) => {
+              const itemQuestion = item.question || item.q || item.title || ''
+              const itemAnswer = item.answer || item.a || item.desc || ''
               const isOpen = openIndex === idx
               return (
                 <div
-                  key={question}
+                  key={itemQuestion || idx}
                   className={`overflow-hidden rounded-xl border transition-all duration-300 ${
                     isOpen
                       ? 'border-kgs-primary/40 bg-white shadow-md'
@@ -98,7 +100,7 @@ function FaqSection({
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-4 p-6 text-left font-heading text-base font-bold text-neutral-900"
                   >
-                    <span>{question}</span>
+                    <span>{itemQuestion}</span>
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full 
                   bg-neutral-100 
@@ -111,7 +113,7 @@ function FaqSection({
                   {isOpen && (
                     <div className="border-t border-neutral-100 px-6 pb-6 pt-2">
                       <p className="font-body text-sm font-medium leading-relaxed text-neutral-600">
-                        {answer}
+                        {itemAnswer}
                       </p>
                     </div>
                   )}

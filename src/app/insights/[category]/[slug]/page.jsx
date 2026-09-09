@@ -26,15 +26,39 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const title = insight.metaTitle || `${insight.title} | Kotnani Global Solutions`;
+  const description = insight.metaDescription || 'Kotnani Global Solutions Insights & Articles';
+  const canonicalUrl = `https://www.kotnaniglobal.com/insights/${category}/${cleanSlug}.html`;
+  const rawBanner = insight.hero?.bannerImage || insight.featuredImage;
+  const ogImage = typeof rawBanner === 'string' ? rawBanner : (rawBanner?.src || '/images/banner/home-hero.webp');
+
   return {
-    title: insight.metaTitle || `${insight.title} | Kotnani Global Solutions`,
-    description: insight.metaDescription || 'Kotnani Global Solutions Insights & Articles',
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: insight.title,
-      description: insight.metaDescription,
+      title,
+      description,
+      url: canonicalUrl,
       type: 'article',
       publishedTime: insight.publishedDate,
       authors: [insight.author?.name || 'Kotnani Global Solutions'],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }

@@ -110,11 +110,9 @@ export default function ProductRoleAgents({
               {/* Browser Mockup Body */}
               <div className="relative bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 sm:p-6 flex items-center justify-center min-h-[320px]">
                 {mockupImage ? (
-                  <Image
-                    src={mockupImage}
-                    alt="MapLibrarySuite Platform Mockup"
-                    width={560}
-                    height={400}
+                  <img
+                    src={mockupImage?.src || mockupImage}
+                    alt="Platform Mockup"
                     className="h-auto w-full rounded-lg object-contain shadow-sm"
                   />
                 ) : (
@@ -134,11 +132,9 @@ export default function ProductRoleAgents({
                     key={idx}
                     className="flex h-12 items-center justify-center rounded-lg bg-white px-4 py-2 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-neutral-100 transition-all hover:scale-105"
                   >
-                    <Image
-                      src={acc.image}
+                    <img
+                      src={acc.image?.src || acc.image}
                       alt={acc.name}
-                      width={90}
-                      height={40}
                       className="h-7 w-auto object-contain"
                     />
                   </div>

@@ -32,9 +32,37 @@ export async function generateMetadata({ params }) {
     }
   }
 
+  const title = `${industry.breadcrumbLabel || industry.hero?.title} | Kotnani Global Solutions`
+  const description = industry.hero?.desc || industry.intro?.desc || 'Kotnani Global Solutions Industry Solutions'
+  const canonicalUrl = `https://www.kotnaniglobal.com/industries/${slug}.html`
+  const rawBanner = industry.hero?.bannerImage
+  const ogImage = typeof rawBanner === 'string' ? rawBanner : (rawBanner?.src || '/images/banner/industries.png')
+
   return {
-    title: `${industry.breadcrumbLabel || industry.hero?.title} | Kotnani Global Solutions`,
-    description: industry.hero?.desc || industry.intro?.desc || 'Kotnani Global Solutions Industry Solutions',
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   }
 }
 

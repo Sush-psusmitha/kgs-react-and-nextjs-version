@@ -102,11 +102,9 @@ export default function ProductTransformations({
             {/* Right Media Image */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-100 p-2 shadow-inner">
-                <Image
-                  src={platformImage}
+                <img
+                  src={platformImage?.src || platformImage}
                   alt={currentTab.heading}
-                  width={520}
-                  height={420}
                   className="h-auto w-full rounded-lg object-contain"
                 />
               </div>

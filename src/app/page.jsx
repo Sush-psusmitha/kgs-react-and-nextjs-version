@@ -12,9 +12,30 @@ import heroBg from '../assets/images/home/home-hero.webp'
 import caseStudies from '../content/caseStudies'
 
 export const metadata = {
-  title: 'Kotnani Global Solutions | Build Smarter Business Through AI-Driven Operations',
-  description:
-    'Scale operations, automate workflows, and harness enterprise AI with Kotnani Global Solutions.',
+  title: "Kotnani Global Solutions | Build Smarter Business Through AI-Driven Operations",
+  description: "Scale operations, automate workflows, and harness enterprise AI with Kotnani Global Solutions.",
+  alternates: {
+    canonical: "https://www.kotnaniglobal.com/",
+  },
+  openGraph: {
+    title: "Kotnani Global Solutions | Build Smarter Business Through AI-Driven Operations",
+    description: "Scale operations, automate workflows, and harness enterprise AI with Kotnani Global Solutions.",
+    url: "https://www.kotnaniglobal.com/",
+    images: [
+      {
+        url: "/images/banner/home-hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Kotnani Global Solutions | Build Smarter Business Through AI-Driven Operations",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Kotnani Global Solutions | Build Smarter Business Through AI-Driven Operations",
+    description: "Scale operations, automate workflows, and harness enterprise AI with Kotnani Global Solutions.",
+    images: ["/images/banner/home-hero.webp"],
+  },
 }
 
 const HOME_SLUGS = [

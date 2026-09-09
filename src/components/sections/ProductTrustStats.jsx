@@ -18,15 +18,11 @@ export default function ProductTrustStats({
     <section className="relative overflow-hidden bg-neutral-950 py-20 md:py-24 text-white" aria-labelledby="pwcHeading">
       {/* Background Graphic */}
       {bgImage && (
-        <div className="absolute inset-0 -z-0 opacity-25 mix-blend-luminosity">
-          <Image
-            src={bgImage}
-            alt=""
-            fill
-            className="object-cover"
-            priority={false}
-          />
-        </div>
+        <img
+          src={bgImage?.src || bgImage}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-luminosity pointer-events-none -z-0"
+        />
       )}
 
       {/* Subtle overlay gradient */}

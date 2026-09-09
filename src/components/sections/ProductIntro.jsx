@@ -64,11 +64,9 @@ export default function ProductIntro({
                       key={idx}
                       className="flex h-10 items-center justify-center rounded-lg bg-white px-3.5 py-1.5 shadow-sm border border-neutral-200/70"
                     >
-                      <Image
-                        src={badgeItem.image}
+                      <img
+                        src={badgeItem.image?.src || badgeItem.image}
                         alt={badgeItem.name}
-                        width={75}
-                        height={30}
                         className="h-6 w-auto object-contain"
                       />
                     </div>
@@ -82,13 +80,10 @@ export default function ProductIntro({
           {image && (
             <div className="lg:col-span-6 xl:col-span-5 flex justify-center">
               <div className="relative overflow-hidden rounded-2xl border border-neutral-200/80 bg-white p-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
-                <Image
-                  src={image}
+                <img
+                  src={image?.src || image}
                   alt={title}
-                  width={660}
-                  height={700}
                   className="h-auto w-full rounded-xl object-cover"
-                  priority
                 />
               </div>
             </div>

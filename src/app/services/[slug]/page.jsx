@@ -35,12 +35,41 @@ export async function generateMetadata({ params }) {
     }
   }
 
+  const title = `${service.breadcrumbLabel || service.hero?.title} | KGS`
   const firstP = service.intro?.paragraphs?.[0]
-  const description = typeof firstP === 'string' ? firstP : (service.techGrid?.desc || service.hero?.title || 'Kotnani Global Solutions Enterprise Services')
+  const description =
+    typeof firstP === 'string'
+      ? firstP
+      : (service.techGrid?.desc || service.hero?.title || 'Kotnani Global Solutions Enterprise Services')
+  const canonicalUrl = `https://www.kotnaniglobal.com/services/${slug}.html`
+  const rawBanner = service.hero?.bannerImage
+  const ogImage = typeof rawBanner === 'string' ? rawBanner : (rawBanner?.src || '/images/banner/automation.webp')
 
   return {
-    title: `${service.breadcrumbLabel || service.hero?.title} | Kotnani Global Solutions`,
+    title,
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   }
 }
 
