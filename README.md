@@ -1,17 +1,36 @@
-# React + Vite
+# Kotnani Global – Next.js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern recreation of the Kotnani Global Solutions website built with React and Next.js.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project recreates the existing Kotnani Global Solutions website using a modern frontend architecture, with a focus on performance, reusable components, responsive design, SEO, and maintainable code.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Next.js
+* React
+* JavaScript / TypeScript
+* CSS / Tailwind CSS
+* Next.js Image Optimization
+* Responsive Web Design
 
-## Expanding the ESLint configuration
+## Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# kgs-react-version" 
+* Responsive design across desktop, tablet, and mobile
+* Reusable React components
+* Next.js routing and page architecture
+* Optimized images and assets
+* SEO-friendly page structure
+* Performance-focused implementation
+* Service and industry page structures
+* Case studies and insights sections
+* Reusable layouts for large numbers of pages
+
+## Deployment
+
+The project is deployed using Netlify.
+
+## Purpose
+
+This project was created as a frontend development and modernization exercise to explore how an existing large-scale static website can be recreated using React and Next.js while improving maintainability, component reusability, and web performance.
